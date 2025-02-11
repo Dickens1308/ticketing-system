@@ -6,7 +6,7 @@ int main() {
         TicketSystem ticketSystem;
         
         // Example of user interaction
-        std::string ticketId;
+        int ticketId;
         double fareAmount;
         std::string passengerType;
         std::string journeyDate;
