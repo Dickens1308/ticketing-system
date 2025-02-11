@@ -2,9 +2,9 @@
 #include "TicketSystem.h"
 
 int main() {
-    TicketSystem ticketSystem;
-
     try {
+        TicketSystem ticketSystem;
+        
         // Example of user interaction
         std::string ticketId;
         double fareAmount;
@@ -25,7 +25,8 @@ int main() {
         std::cin >> routeInfo;
 
         // Validate input data
-        if (ticketSystem.validateInputData(ticketId, fareAmount, passengerType, journeyDate, routeInfo)) {
+        bool validated = ticketSystem.validateInputData(ticketId, fareAmount, passengerType, journeyDate, routeInfo);
+        if (validated) {
             double totalFare = ticketSystem.calculateTotalFare(fareAmount, passengerType);
             ticketSystem.storeTicketInformation(ticketId, fareAmount, passengerType, journeyDate, routeInfo, totalFare);
             ticketSystem.printTicketDetails(ticketId);
