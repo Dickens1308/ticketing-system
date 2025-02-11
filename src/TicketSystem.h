@@ -2,6 +2,7 @@
 #define TICKETSYSTEM_H
 
 #include <string>
+#include <vector>
 
 class TicketSystem
 {
@@ -15,6 +16,20 @@ private:
     std::vector<TicketSystem> tickets;
 
 public:
+    // Constructors
+    TicketSystem(int ticketId,
+                 double fareAmount,
+                 std::string passengerType,
+                 std::string journeyDate,
+                 std::string routeInfo,
+                 double totalFare)
+        : ticketId(ticketId), 
+        fareAmount(fareAmount), 
+        passengerType(passengerType), 
+        journeyDate(journeyDate), 
+        routeInfo(routeInfo), 
+        totalFare(totalFare) {};
+
     // Getters
     int getTicketId() const { return ticketId; }
     double getFareAmount() const { return fareAmount; }
@@ -32,9 +47,9 @@ public:
     void storeTicketInformation(int ticketId, double fareAmount, const std::string &passengerType, const std::string &journeyDate, const std::string &routeInfo, double totalFare);
     void printTicketDetails(int ticketId);
     void showErrorMessages(const std::string &error);
+
     // Dickens
     void displayValidationStatus(bool status);
-    std::vector<TicketSystem> getTickets();
     void generateReports();
     void createNewTicket(int ticketId, double fareAmount, const std::string &passengerType, const std::string &journeyDate, const std::string &routeInfo);
     void updateTicketStatus(int ticketId, const std::string &status);

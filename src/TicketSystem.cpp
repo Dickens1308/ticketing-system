@@ -6,24 +6,6 @@
 #include <vector>
 #include <fstream>
 
-void TicketSystem::createNewTicket(int ticketId, double fareAmount, const std::string &passengerType, const std::string &journeyDate, const std::string &routeInfo)
-{
-    try
-    {
-        if (!validateInputData(ticketId, fareAmount, passengerType, journeyDate, routeInfo))
-        {
-            throw std::invalid_argument("Invalid input data.");
-        }
-        double totalFare = calculateTotalFare(fareAmount, passengerType);
-        storeTicketInformation(ticketId, fareAmount, passengerType, journeyDate, routeInfo, totalFare);
-        printTicketDetails(ticketId);
-    }
-    catch (const std::exception &e)
-    {
-        showErrorMessages(e.what());
-    }
-}
-
 bool TicketSystem::validateInputData(int ticketId, double fareAmount, const std::string &passengerType, const std::string &journeyDate, const std::string &routeInfo)
 {
     // Implement validation logic
@@ -52,35 +34,48 @@ void TicketSystem::displayValidationStatus(bool status)
 void TicketSystem::generateReports()
 {
     std::vector<TicketSystem> tickets = getTickets();
+    std::ofstream reportFile("ticket_report.txt");
 
-    // Open a file to write the report
-    std::ofstream reportFile("report.txt");
-    if (!reportFile.is_open())
+    if (reportFile.is_open())
     {
-        std::cerr << "Failed to open report file." << std::endl;
-        return;
+        reportFile << "Ticket Report\n";
+        reportFile << "=============\n\n";
+
+        for (const auto &ticket : tickets)
+        {
+            reportFile << "Ticket ID: " << ticket.getTicketId() << " | ";
+            reportFile << "Fare Amount: " << ticket.getFareAmount() << " | ";
+            reportFile << "Passenger Type: " << ticket.getPassengerType() << " | ";
+            reportFile << "Journey Date: " << ticket.getJourneyDate() << " | ";
+            reportFile << "Route Info: " << ticket.getRouteInfo() << " | ";
+            reportFile << "Total Fare: " << ticket.getTotalFare() << std::endl;
+        }
+
+        reportFile.close();
+        std::cout << "Report generated successfully." << std::endl;
     }
-
-    // Write the report header
-    reportFile << "Ticket Report\n";
-    reportFile << "=============\n\n";
-
-    // Write each ticket's details
-    for (const auto &ticket : tickets)
+    else
     {
-        printTicketDetails(ticket.getTicketId());
-        reportFile << "-------------------------\n";
+        std::cerr << "Error: Unable to open file for writing." << std::endl;
     }
-
-    // Close the file
-    reportFile.close();
-
-    std::cout << "Report generated successfully." << std::endl;
 }
 
 void TicketSystem::createNewTicket(int ticketId, double fareAmount, const std::string &passengerType, const std::string &journeyDate, const std::string &routeInfo)
 {
-    // Implement ticket creation logic
+    try
+    {
+        if (!validateInputData(ticketId, fareAmount, passengerType, journeyDate, routeInfo))
+        {
+            throw std::invalid_argument("Invalid input data.");
+        }
+        double totalFare = calculateTotalFare(fareAmount, passengerType);
+        storeTicketInformation(ticketId, fareAmount, passengerType, journeyDate, routeInfo, totalFare);
+        printTicketDetails(ticketId);
+    }
+    catch (const std::exception &e)
+    {
+        showErrorMessages(e.what());
+    }
 }
 
 void TicketSystem::updateTicketStatus(int ticketId, const std::string &status)
@@ -89,8 +84,37 @@ void TicketSystem::updateTicketStatus(int ticketId, const std::string &status)
 
 double TicketSystem::calculateTotalFares()
 {
+    double totalFares = 0.0;
+
+    // Assuming we have a vector of tickets
+    std::vector<TicketSystem> tickets = getTickets();
+
+    // Sum up the fares of all tickets
+    for (const auto &ticket : tickets)
+    {
+        totalFares += ticket.getTotalFare();
+    }
+
+    return totalFares;
 }
 
 void TicketSystem::printReports()
 {
+    // Assuming we have a vector of tickets
+    std::vector<TicketSystem> tickets = getTickets();
+
+    // Print the report header
+    std::cout << "Ticket Report\n";
+    std::cout << "=============\n\n";
+
+    // Print each ticket's details
+    for (const auto &ticket : tickets)
+    {
+        std::cout << "Ticket ID: " << ticket.getTicketId() << " | ";
+        std::cout << "Fare Amount: " << ticket.getFareAmount() << " | ";
+        std::cout << "Passenger Type: " << ticket.getPassengerType() << " | ";
+        std::cout << "Journey Date: " << ticket.getJourneyDate() << " | ";
+        std::cout << "Route Info: " << ticket.getRouteInfo() << " | ";
+        std::cout << "Total Fare: " << ticket.getTotalFare() << std::endl;
+    }
 }
