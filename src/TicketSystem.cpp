@@ -49,10 +49,6 @@ void TicketSystem::displayValidationStatus(bool status)
     }
 }
 
-std::vector<TicketSystem> TicketSystem::getTickets() {
-    return this->tickets;
-}
-
 void TicketSystem::generateReports()
 {
     std::vector<TicketSystem> tickets = getTickets();

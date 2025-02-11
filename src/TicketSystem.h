@@ -13,6 +13,7 @@ private:
     std::string routeInfo;
     double totalFare;
     std::vector<TicketSystem> tickets;
+
 public:
     // Getters
     int getTicketId() const { return ticketId; }
@@ -21,6 +22,7 @@ public:
     std::string getJourneyDate() const { return journeyDate; }
     std::string getRouteInfo() const { return routeInfo; }
     double getTotalFare() const { return totalFare; }
+    std::vector<TicketSystem> getTickets() const { return tickets; }
 
     // Musa
     bool validateInputData(int ticketId, double fareAmount, const std::string &passengerType, const std::string &journeyDate, const std::string &routeInfo);
