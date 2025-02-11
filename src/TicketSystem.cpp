@@ -49,10 +49,8 @@ void TicketSystem::displayValidationStatus(bool status)
     }
 }
 
-std::vector<TicketSystem> TicketSystem::getTickets()
-{
-    // Implement logic to retrieve tickets from a data source
-    return {}; // Placeholder
+std::vector<TicketSystem> TicketSystem::getTickets() {
+    return this->tickets;
 }
 
 void TicketSystem::generateReports()

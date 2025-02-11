@@ -12,7 +12,7 @@ private:
     std::string journeyDate;
     std::string routeInfo;
     double totalFare;
-
+    std::vector<TicketSystem> tickets;
 public:
     // Getters
     int getTicketId() const { return ticketId; }
