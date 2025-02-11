@@ -3,57 +3,48 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
-class TicketSystem
-{
+template <typename T, typename U, typename V>
+class TicketSystem {
 private:
-    int ticketId;
-    double fareAmount;
-    std::string passengerType;
-    std::string journeyDate;
-    std::string routeInfo;
-    double totalFare;
-    std::vector<TicketSystem> tickets;
+    T ticketId;
+    U fareAmount;
+    V passengerType;
+    V journeyDate;
+    V routeInfo;
+    U totalFare;
+    std::vector<TicketSystem<T, U, V>> tickets;
 
 public:
-    // Constructors
-    TicketSystem(int ticketId,
-                 double fareAmount,
-                 std::string passengerType,
-                 std::string journeyDate,
-                 std::string routeInfo,
-                 double totalFare)
-        : ticketId(ticketId), 
-        fareAmount(fareAmount), 
-        passengerType(passengerType), 
-        journeyDate(journeyDate), 
-        routeInfo(routeInfo), 
-        totalFare(totalFare) {};
+    // Constructor
+    TicketSystem(T ticketId, U fareAmount, V passengerType, V journeyDate, V routeInfo)
+        : ticketId(ticketId), fareAmount(fareAmount), passengerType(passengerType), journeyDate(journeyDate), routeInfo(routeInfo) {}
 
     // Getters
-    int getTicketId() const { return ticketId; }
-    double getFareAmount() const { return fareAmount; }
-    std::string getPassengerType() const { return passengerType; }
-    std::string getJourneyDate() const { return journeyDate; }
-    std::string getRouteInfo() const { return routeInfo; }
-    double getTotalFare() const { return totalFare; }
-    std::vector<TicketSystem> getTickets() const { return tickets; }
+    T getTicketId() const { return ticketId; }
+    U getFareAmount() const { return fareAmount; }
+    V getPassengerType() const { return passengerType; }
+    V getJourneyDate() const { return journeyDate; }
+    V getRouteInfo() const { return routeInfo; }
+    U getTotalFare() const { return totalFare; }
+    std::vector<TicketSystem<T, U, V>> getTickets() const { return tickets; }
 
     // Musa
-    bool validateInputData(int ticketId, double fareAmount, const std::string &passengerType, const std::string &journeyDate, const std::string &routeInfo);
-    double calculateTotalFare(double fareAmount, const std::string &passengerType);
-    double applyDiscounts(double fareAmount, const std::string &passengerType);
-    int generateUniqueId();
-    void storeTicketInformation(int ticketId, double fareAmount, const std::string &passengerType, const std::string &journeyDate, const std::string &routeInfo, double totalFare);
-    void printTicketDetails(int ticketId);
-    void showErrorMessages(const std::string &error);
+    bool validateInputData(T ticketId, U fareAmount, const V &passengerType, const V &journeyDate, const V &routeInfo);
+    U calculateTotalFare(U fareAmount, const V &passengerType);
+    U applyDiscounts(U fareAmount, const V &passengerType);
+    T generateUniqueId();
+    void storeTicketInformation(T ticketId, U fareAmount, const V &passengerType, const V &journeyDate, const V &routeInfo, U totalFare);
+    void printTicketDetails(T ticketId);
+    void showErrorMessages(const V &error);
 
     // Dickens
     void displayValidationStatus(bool status);
     void generateReports();
-    void createNewTicket(int ticketId, double fareAmount, const std::string &passengerType, const std::string &journeyDate, const std::string &routeInfo);
-    void updateTicketStatus(int ticketId, const std::string &status);
-    double calculateTotalFares();
+    void createNewTicket();
+    void updateTicketStatus(T ticketId, const V &status);
+    U calculateTotalFares();
     void printReports();
 };
 
